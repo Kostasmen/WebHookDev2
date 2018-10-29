@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/WebHookTest" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/WebHookTest" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/WebHookTest" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="ProcessRequest">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="p_MessageIn" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="p_MessageOut" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ProcessRequest_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="p_MessageOut" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Ping">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="Ping_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="ProcessRequest">
+    <part name="parameters" element="tns:ProcessRequest" />
+  </message>
+  <message name="ProcessRequest_Result">
+    <part name="parameters" element="tns:ProcessRequest_Result" />
+  </message>
+  <message name="Ping">
+    <part name="parameters" element="tns:Ping" />
+  </message>
+  <message name="Ping_Result">
+    <part name="parameters" element="tns:Ping_Result" />
+  </message>
+  <portType name="WebHookTest_Port">
+    <operation name="ProcessRequest">
+      <input name="ProcessRequest" message="tns:ProcessRequest" />
+      <output name="ProcessRequest_Result" message="tns:ProcessRequest_Result" />
+    </operation>
+    <operation name="Ping">
+      <input name="Ping" message="tns:Ping" />
+      <output name="Ping_Result" message="tns:Ping_Result" />
+    </operation>
+  </portType>
+  <binding name="WebHookTest_Binding" type="tns:WebHookTest_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="ProcessRequest">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebHookTest:ProcessRequest" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ProcessRequest">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ProcessRequest_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Ping">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebHookTest:Ping" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Ping">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Ping_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="WebHookTest">
+    <port name="WebHookTest_Port" binding="tns:WebHookTest_Binding">
+      <address location="http://52.164.227.28:7067/Development2/WS/Master/Codeunit/WebHookTest" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>
